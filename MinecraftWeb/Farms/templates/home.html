@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}Home - My Website{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+
+
+        <div class="search-bar-container">
+            <form method="get" action="">
+                <input type="text" name="q" class="search-bar" placeholder="Search for farms...">
+                <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+
+        <h2 class="mt-5">Farms</h2>
+        <div class="card-container">
+            {% for farm in farms %}
+                <a href="{% url 'farm_detail' farm.pk %}" class="card-link">
+                    <div class="card">
+                        <div class="card-image">
+                            {% if 'youtube' in farm.tutorial_link %}
+                                <img src="https://img.youtube.com/vi/{{ farm.tutorial_link|slice:'-11:' }}/0.jpg" alt="YouTube Thumbnail">
+                            {% endif %}
+                        </div>
+                        <div class="card-content">
+                            <h5 class="card-title">{{ farm.name }}</h5>
+                            <p class="card-text"><strong>Difficulty:</strong> {{ farm.difficulty }}/5</p>
+                            <p class="card-text"><strong>Efficiency:</strong> {{ farm.efficiency }}/5</p>
+                            <p class="card-text"><strong>Description:</strong> {{ farm.description }}</p>
+                        </div>
+                    </div>
+                </a>
+                {% if forloop.counter|divisibleby:6 and not forloop.last %}
+                    </div><div class="card-container">
+                {% endif %}
+            {% empty %}
+                <p class="text-center">No farms found.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+        .search-bar-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .search-bar {
+            width: 300px;
+            padding: 10px;
+            border: 2px solid #000;
+            border-radius: 25px;
+            outline: none;
+            font-size: 1rem;
+            transition: box-shadow 0.3s;
+        }
+        .search-bar:focus {
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+        }
+        .search-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: -40px;
+            outline: none;
+        }
+        .search-button i {
+            font-size: 1.5rem;
+            color: #000;
+        }
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            justify-items: start;
+            margin-top: 20px;
+            margin-left: 40px;
+        }
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        .card {
+            width: 400px;
+            border: 1px solid #300;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card-image img {
+            width: 100%;
+            height: auto;
+        }
+        .card-content {
+            padding: 15px;
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-top: -5px;
+        }
+        .card-text {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            margin-top: -5px;
+        }
+    </style>
+{% endblock %}

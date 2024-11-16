@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}{{ farm.name }} Details{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h2>{{ farm.name }}</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Location:</strong> {{ farm.location }}</p>
+                <p><strong>Owner:</strong> {{ farm.owner.username }}</p>
+                <p><strong>Type:</strong> {{ farm.type }}</p>
+                <p><strong>Tutorial link:</strong> <a href="{{ farm.tutorial_link }}" target="_blank">{{ farm.tutorial_link }}</a></p>
+                <p><strong>Difficulty:</strong> {{ farm.difficulty }} (1-5)</p>
+                <p><strong>Efficiency:</strong> {{ farm.efficiency }} (1-5)</p>
+                <p><strong>Description:</strong> {{ farm.description }}</p>
+                <a href="/" class="btn btn-primary mt-3">Back to Home</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
