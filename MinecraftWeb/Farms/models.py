@@ -1,16 +1,39 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from django.db import models
+
 class Farm(models.Model):
+    FARM_TYPE_CHOICES = [
+        ('iron', 'Iron Farm'),
+        ('gold', 'Gold Farm'),
+        ('wood', 'Wood Farm'),
+        ('food', 'Food Farm'),
+        ('mob', 'Mob Farm'),
+    ]
+
+    DIFFICULTY_CHOICES = [
+        ('easy', 'Easy'),
+        ('medium', 'Medium'),
+        ('hard', 'Hard'),
+        ('expert', 'Expert'),
+    ]
+
     name = models.CharField(max_length=100)
-    location = models.CharField(max_length=100)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    type = models.CharField(max_length=100, null=True, blank=True)
-    tutorial_link = models.URLField(max_length=200, null=True, blank=True)
-    difficulty = models.IntegerField(choices=[(i, i) for i in range(1, 6)], null=True, blank=True)
-    efficiency = models.IntegerField(choices=[(i, i) for i in range(1, 6)], null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
-    image = models.ImageField(upload_to='farm_images/', null=True, blank=True)  # Přidáno pole pro obrázek
+    overall_rating = models.IntegerField(choices=[(i, f"{i} Stars") for i in range(1, 6)], default=1)
+    farm_type = models.CharField(max_length=50, choices=FARM_TYPE_CHOICES, default='iron')
+    difficulty = models.CharField(max_length=50, choices=DIFFICULTY_CHOICES)
+    rates = models.CharField(max_length=100)
+    description = models.TextField()
+    tutorial_link = models.URLField(max_length=200)
 
     def __str__(self):
         return self.name
+
+class ContactMessage(models.Model):
+    username = models.CharField(max_length=100)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Message from {self.username} at {self.created_at}"

@@ -1,7 +1,9 @@
 from django.contrib import admin
-from .models import Farm
+from .models import Farm, ContactMessage
 
 @admin.register(Farm)
 class FarmAdmin(admin.ModelAdmin):
-    list_display = ('name', 'owner', 'location', 'difficulty', 'efficiency')
-    fields = ('name', 'owner', 'location', 'type', 'tutorial_link', 'difficulty', 'efficiency', 'description', 'image')
+    list_display = ('name', 'farm_type', 'overall_rating', 'difficulty', 'rates', "description", "tutorial_link")
+    search_fields = ('name', 'farm_type')
+
+admin.site.register(ContactMessage)

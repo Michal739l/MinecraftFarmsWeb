@@ -3,6 +3,35 @@
 {% block title %}Logout - My Website{% endblock %}
 
 {% block content %}
-    <h2>You have been logged out</h2>
-    <p><a href="/login/">Click here to login again</a> or return to the <a href="/">home page</a>.</p>
+    <div class="logout-container">
+        <h2 class="logout-title">You have been logged out</h2>
+        <p class="logout-message"><a href="/login/" class="logout-link">Click here to login again</a> or return to the <a href="/" class="logout-link">home page</a>.</p>
+    </div>
+
+    <style>
+        .logout-container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .logout-title {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+        .logout-message {
+            font-size: 1em;
+        }
+        .logout-link {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .logout-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 {% endblock %}

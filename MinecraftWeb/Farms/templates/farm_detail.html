@@ -3,21 +3,93 @@
 {% block title %}{{ farm.name }} Details{% endblock %}
 
 {% block content %}
-    <div class="container mt-4">
-        <div class="card">
-            <div class="card-header">
-                <h2>{{ farm.name }}</h2>
-            </div>
-            <div class="card-body">
-                <p><strong>Location:</strong> {{ farm.location }}</p>
-                <p><strong>Owner:</strong> {{ farm.owner.username }}</p>
-                <p><strong>Type:</strong> {{ farm.type }}</p>
-                <p><strong>Tutorial link:</strong> <a href="{{ farm.tutorial_link }}" target="_blank">{{ farm.tutorial_link }}</a></p>
-                <p><strong>Difficulty:</strong> {{ farm.difficulty }} (1-5)</p>
-                <p><strong>Efficiency:</strong> {{ farm.efficiency }} (1-5)</p>
-                <p><strong>Description:</strong> {{ farm.description }}</p>
-                <a href="/" class="btn btn-primary mt-3">Back to Home</a>
-            </div>
+    <div class="farm-details-wrapper">
+        <div class="farm-video-section">
+            <iframe id="tutorial-video" class="tutorial-video" src="https://www.youtube.com/embed/{{ farm.tutorial_link|slice:'-11:' }}" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="farm-details-section">
+            <h2 class="farm-name">{{ farm.name }}</h2>
+            <h3</h3>
+            <p class="farm-rating"><strong>Rating:</strong>
+                {% for i in "12345" %}
+                {% if i|add:'0' <= farm.overall_rating %}⭐{% else %}★{% endif %}
+                {% endfor %}
+            </p>
+            <p class="farm-difficulty"><strong>Difficulty:</strong> {{ farm.get_difficulty_display }}</p>
+            <p class="farm-rates"><strong>Rates:</strong> {{ farm.rates }}</p>
+            <p class="farm-description"><strong>Description:</strong> {{ farm.description }}</p>
+
         </div>
     </div>
+    <div class="farm-back-home">
+        <a href="/" class="btn-back-home">Back to Home</a>
+    </div>
+
+    <style>
+        .farm-details-wrapper {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .farm-video-section {
+            flex: 1.5;
+            margin-right: 20px;
+        }
+        .tutorial-video {
+            width: 100%;
+            height: 385px;
+            border-radius: 10px;
+        }
+        .farm-details-section {
+            flex: 1;
+            padding: 20px;
+            border-left: 2px solid #3e5c76;
+        }
+        .farm-name {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .farm-type {
+            font-size: 1.5em;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .farm-rating, .farm-difficulty, .farm-rates, .farm-description {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        .star {
+            font-size: 1.5em;
+            color: #ccc;
+        }
+        .star.filled {
+            color: #ffcc00;
+        }
+        .farm-back-home {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .btn-back-home {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2em;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .btn-back-home:hover {
+            background-color: #ff6347;
+            transform: scale(1.05);
+        }
+    </style>
 {% endblock %}

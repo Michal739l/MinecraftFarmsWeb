@@ -15,7 +15,8 @@
             min-height: 100vh;
         }
         header {
-            background-color: #3e5c76;
+            background-size: cover;
+            background: url('/static/images/header-background.jpg') no-repeat center center;
             padding: 20px;
         }
         nav {
@@ -24,6 +25,7 @@
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
+            margin-left: 765px;
         }
         nav ul {
             list-style: none;
@@ -43,15 +45,16 @@
             transition: background-color 0.3s, transform 0.3s;
         }
         nav ul li a:hover {
-            background-color: #1d2d44;
+            background-color: #4CAF50;
             transform: scale(1.1);
+            text-align: center;
         }
         .auth-buttons {
             display: flex;
-            align-items: center;
+            align-items: right;
         }
         .button {
-            background-color: #1d2d44;
+            background-color: #4CAF50;
             color: white;
             text-decoration: none;
             padding: 10px 20px;
@@ -61,7 +64,7 @@
             font-size: 1.1em;
         }
         .button:hover {
-            background-color: #1d2d44;
+            background-color: #4CAF50;
             transform: scale(1.1);
         }
         .welcome-text {
@@ -74,27 +77,26 @@
             width: 1800px;
             margin: 40px auto;
             padding: 10px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
         }
         footer {
+            background-size: cover;
+            background: url('/static/images/footer-background.jpg') no-repeat center center;
             text-align: center;
             padding: 20px;
             background-color: #748cab;
             color: white;
             margin-top: 20px;
-        }
+        .middle-buttons
     </style>
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/about/">About</a></li>
-                <li><a href="/contact/">Contact</a></li>
-                <li><a href="/services/">Services</a></li>
+                <li><a class="middle-buttons" href="/">Home</a></li>
+                <li><a class="middle-buttons" href="/about/">About</a></li>
+                <li><a class="middle-buttons" href="/contact/">Contact us</a></li>
             </ul>
             <div class="auth-buttons">
                 {% if user.is_authenticated %}
@@ -115,7 +117,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 My Website</p>
+        <p>&copy; 2024 My Website | <a href="/privacy-policy/" style="color: white; text-decoration: underline;">Privacy Policy</a></p>
     </footer>
 </body>
 </html>

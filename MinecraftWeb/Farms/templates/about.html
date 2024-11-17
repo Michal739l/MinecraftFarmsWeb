@@ -1,8 +1,43 @@
 {% extends "base.html" %}
 
-{% block title %}About - My Website{% endblock %}
+{% block title %}About - Minecraft Farm Finder{% endblock %}
 
 {% block content %}
-    <h1>About Us</h1>
-    <p>Learn more about who we are, our mission, and what we do.</p>
+    <div class="about-page-container">
+        <h1 class="about-title">Welcome to Minecraft Farm Finder</h1>
+        <div class="about-content">
+            <p>
+                Minecraft Farm Finder is your go-to source for discovering the best Minecraft farms and tutorials all in one place. Whether you're looking to build an efficient iron farm, automate your food supply, or master mob farming, our website provides easy access to detailed tutorials and reliable farm designs that make your Minecraft experience smoother and more enjoyable.
+            </p>
+            <p>
+                Our goal is to help players of all skill levels find the information they need without hassle. From beginners looking for simple builds to experts looking for the best farm possible, Minecraft Farm Finder has something for everyone.
+            </p>
+            <p>
+                Browse through our collection of farms, filter by type or difficulty, and get step-by-step guidance to bring your Minecraft projects to life. Let's make farming in Minecraft effortless and fun together!
+            </p>
+        </div>
+    </div>
+
+    <style>
+        .about-page-container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .about-title {
+            font-size: 2.5rem;
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .about-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+    </style>
 {% endblock %}
+
