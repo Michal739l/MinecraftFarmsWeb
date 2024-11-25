@@ -1,112 +1,88 @@
 {% extends "base.html" %}
 
-{% block title %}Logout - My Website{% endblock %}
+{% block title %}Add New Farm - My Website{% endblock %}
 
 {% block content %}
-    <div class="logout-container">
-        <h2 class="logout-title">You have been logged out</h2>
-        <p class="logout-message"><a href="/login/" class="logout-link">Click here to login again</a> or return to the <a href="/" class="logout-link">home page</a>.</p>
-    </div>
-
+<div class="remove-bar-container">
+        <ul>
+                <li><a class="remove-button" href="/remove-farm/">Remove Farms</a></li>
+        </ul>
+</div>
     <div class="farm-rating-container">
-        <form method="post">
+        <h2 class="add-farm-title">Add New Farm</h2>
+        <form method="post" class="add-farm-form">
             {% csrf_token %}
-            <label for="rating">Overall Rating:</label>
-            <select id="rating" name="rating">
-                <option value="1">1 Star</option>
-                <option value="2">2 Stars</option>
-                <option value="3">3 Stars</option>
-                <option value="4">4 Stars</option>
-                <option value="5">5 Stars</option>
-            </select>
-
-            <label for="farm-type">Type:</label>
-            <select id="farm-type" name="farm_type">
-                <option value="iron">Iron Farm</option>
-                <option value="gold">Gold Farm</option>
-                <option value="wood">Wood Farm</option>
-                <option value="food">Food Farm</option>
-                <option value="mob">Mob Farm</option>
-            </select>
-
-            <label for="difficulty">Difficulty:</label>
-            <select id="difficulty" name="difficulty">
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-                <option value="expert">Expert</option>
-            </select>
-
-            <label for="rates">Rates:</label>
-            <input type="text" id="rates" name="rates" placeholder="Enter rates here">
-
-            <label for="description">Description:</label>
-            <textarea id="description" name="description" rows="4" placeholder="Enter description here"></textarea>
-
-            <label for="tutorial-link">Tutorial Link:</label>
-            <input type="url" id="tutorial-link" name="tutorial_link" placeholder="Enter tutorial link">
-
+            {{ form.as_p }}
             <button type="submit" class="submit-button">Submit</button>
         </form>
     </div>
 
     <style>
-        .logout-container {
+        .remove-bar-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .farm-rating-container {
             width: 50%;
             margin: 0 auto;
             padding: 20px;
             background-color: #f9f9f9;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-        .logout-title {
+        .add-farm-title {
             font-size: 1.8em;
             margin-bottom: 20px;
+            color: #333;
         }
-        .logout-message {
-            font-size: 1em;
+        .add-farm-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        .logout-link {
-            color: #4CAF50;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .logout-link:hover {
-            text-decoration: underline;
-        }
-        .farm-rating-container {
-            width: 60%;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        form label {
-            display: block;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        form select, form input[type="text"], form input[type="url"], form textarea {
-            width: calc(100% - 20px);
-            padding: 8px;
-            margin-top: 5px;
+        .add-farm-form input, .add-farm-form select, .add-farm-form textarea {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 1em;
         }
         .submit-button {
-            margin-top: 20px;
-            padding: 10px 20px;
             background-color: #4CAF50;
-            color: #fff;
+            color: white;
+            padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 1em;
             transition: background-color 0.3s;
         }
         .submit-button:hover {
             background-color: #45a049;
         }
+        .remove-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            text-decoration: none;
+        }
+        .remove-button-container {
+            margin-left: 20px;
+            position: relative;
+        }
+        ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        }
     </style>
 {% endblock %}
+

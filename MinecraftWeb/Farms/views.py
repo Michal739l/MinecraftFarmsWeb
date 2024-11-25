@@ -3,7 +3,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import Farm
-from .forms import RegisterForm, ContactForm
+from .forms import RegisterForm, ContactForm, FarmForm
 
 def home(request):
     farms = Farm.objects.all()
@@ -34,6 +34,34 @@ def home(request):
 
 def about(request):
     return render(request, 'about.html')
+
+def add_farm(request):
+    if request.method == 'POST':
+        form = FarmForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')  # Redirect to a relevant page after saving
+    else:
+        form = FarmForm()
+
+    return render(request, 'add_farm.html', {'form': form})
+
+def remove_farm(request):
+    if request.method == 'POST':
+        farm_id = request.POST.get('farm_id')
+        if farm_id:
+            try:
+                farm = Farm.objects.get(pk=farm_id)
+                farm.delete()
+            except Farm.DoesNotExist:
+                pass
+        return redirect('home')  # Redirect to the home page after removing
+
+    farms = Farm.objects.all()  # Get all farms to display in the dropdown
+    return render(request, 'remove_farm.html', {'farms': farms})
+
+def nether_calculator(request):
+    return render(request, 'nether-calculator.html')
 
 def privacy_policy(request):
     return render(request, 'privacy-policy.html')

@@ -25,7 +25,7 @@
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
-            margin-left: 765px;
+            margin-left: 588px;
         }
         nav ul {
             list-style: none;
@@ -94,9 +94,11 @@
     <header>
         <nav>
             <ul>
-                <li><a class="middle-buttons" href="/">Home</a></li>
+                <li><a class="middle-buttons" href="/">Farms</a></li>
                 <li><a class="middle-buttons" href="/about/">About</a></li>
                 <li><a class="middle-buttons" href="/contact/">Contact us</a></li>
+                <li><a class="middle-buttons" href="/add_farm/">Edit Farms</a></li>
+                <li><a class="middle-buttons" href="/nether_calculator/">Nether Calculator</a></li>
             </ul>
             <div class="auth-buttons">
                 {% if user.is_authenticated %}
@@ -117,7 +119,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 My Website | <a href="/privacy-policy/" style="color: white; text-decoration: underline;">Privacy Policy</a></p>
+        <p>&copy; 2024 Minecraft Farm Finder | <a href="/privacy-policy/" style="color: white; text-decoration: underline;">Privacy Policy</a></p>
     </footer>
 </body>
 </html>

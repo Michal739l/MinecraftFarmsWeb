@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}Remove Farm - My Website{% endblock %}
+
+{% block content %}
+<div class="add-bar-container">
+        <ul>
+                <li><a class="add-button" href="/add_farm/">Add Farms</a></li>
+        </ul>
+</div>
+    <div class="farm-removal-container">
+        <h2 class="remove-farm-title">Remove Farm</h2>
+        <form method="post" class="remove-farm-form">
+            {% csrf_token %}
+            <label for="farm_select">Select Farm to Remove:</label>
+            <select id="farm_select" name="farm_id" required onchange="displayFarmDetails()">
+                <option value="" disabled selected>Select a farm</option>
+                {% for farm in farms %}
+                    <option value="{{ farm.id }}"
+                            data-rating="{{ farm.overall_rating }}"
+                            data-type="{{ farm.get_farm_type_display }}"
+                            data-difficulty="{{ farm.get_difficulty_display }}"
+                            data-rates="{{ farm.rates }}"
+                            data-description="{{ farm.description }}">
+                        {{ farm.name }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="remove-button">Remove Farm</button>
+        </form>
+
+        <div id="farm_details" class="farm-details" style="display:none;">
+            <h3>Farm Details</h3>
+            <p><strong>Type:</strong> <span id="farm_type"></span></p>
+            <p><strong>Rating:</strong> <span id="farm_rating"></span> Stars</p>
+            <p><strong>Difficulty:</strong> <span id="farm_difficulty"></span></p>
+            <p><strong>Rates:</strong> <span id="farm_rates"></span></p>
+            <p><strong>Description:</strong> <span id="farm_description"></span></p>
+        </div>
+    </div>
+
+    <style>
+        .add-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            text-decoration: none;
+        }
+        .add-bar-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        }
+        .farm-removal-container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .remove-farm-title {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .remove-farm-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .remove-farm-form select {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        .remove-button {
+            background-color: #FF6347;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .remove-button:hover {
+            background-color: #e5533f;
+        }
+        .farm-details {
+            margin-top: 20px;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            text-align: left;
+        }
+    </style>
+
+    <script>
+        function displayFarmDetails() {
+            const farmSelect = document.getElementById('farm_select');
+            const selectedOption = farmSelect.options[farmSelect.selectedIndex];
+
+            if (selectedOption.value !== "") {
+                document.getElementById('farm_type').textContent = selectedOption.getAttribute('data-type');
+                document.getElementById('farm_rating').textContent = selectedOption.getAttribute('data-rating');
+                document.getElementById('farm_difficulty').textContent = selectedOption.getAttribute('data-difficulty');
+                document.getElementById('farm_rates').textContent = selectedOption.getAttribute('data-rates');
+                document.getElementById('farm_description').textContent = selectedOption.getAttribute('data-description');
+
+                document.getElementById('farm_details').style.display = 'block';
+            } else {
+                document.getElementById('farm_details').style.display = 'none';
+            }
+        }
+    </script>
+{% endblock %}

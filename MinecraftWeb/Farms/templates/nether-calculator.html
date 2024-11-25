@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block title %}Nether Calculator - My Website{% endblock %}
+
+{% block content %}
+<div class="calculator-container">
+    <h2 class="calculator-title">Nether Calculator</h2>
+    <form id="calculator-form" class="calculator-form">
+        <label for="overworld-x">Overworld X:</label>
+        <input type="number" id="overworld-x" placeholder="Enter X coordinate">
+
+        <label for="overworld-z">Overworld Z:</label>
+        <input type="number" id="overworld-z" placeholder="Enter Z coordinate">
+
+        <p>OR</p>
+
+        <label for="nether-x">Nether X:</label>
+        <input type="number" id="nether-x" placeholder="Enter X coordinate">
+
+        <label for="nether-z">Nether Z:</label>
+        <input type="number" id="nether-z" placeholder="Enter Z coordinate">
+
+        <button type="button" class="calculate-button" onclick="calculateCoordinates()">Calculate</button>
+    </form>
+
+    <div id="results-container" class="results-container" style="display:none;">
+        <h3>Results:</h3>
+        <p id="results"></p>
+    </div>
+</div>
+
+<style>
+    .add-button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+        text-decoration: none;
+    }
+
+    .add-bar-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .calculator-container {
+        width: 50%;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .calculator-title {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .calculator-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .calculator-form label {
+        font-size: 1em;
+        margin: 5px 0;
+    }
+
+    .calculator-form input {
+        width: 80%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1em;
+    }
+
+    .calculate-button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.3s;
+    }
+
+    .calculate-button:hover {
+        background-color: #45a049;
+    }
+
+    .results-container {
+        margin-top: 20px;
+        background-color: #f0f0f0;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        text-align: left;
+        display: block;
+    }
+</style>
+
+<script>
+    function calculateCoordinates() {
+        // Get the inputs
+        const overworldX = parseFloat(document.getElementById('overworld-x').value);
+        const overworldZ = parseFloat(document.getElementById('overworld-z').value);
+        const netherX = parseFloat(document.getElementById('nether-x').value);
+        const netherZ = parseFloat(document.getElementById('nether-z').value);
+
+        let result = '';
+
+        if (!isNaN(overworldX) && !isNaN(overworldZ)) {
+            // Convert Overworld to Nether
+            const nx = (overworldX / 8).toFixed(2);
+            const nz = (overworldZ / 8).toFixed(2);
+            result = `Nether coordinates: X=${nx}, Z=${nz}`;
+        } else if (!isNaN(netherX) && !isNaN(netherZ)) {
+            // Convert Nether to Overworld
+            const ox = (netherX * 8).toFixed(2);
+            const oz = (netherZ * 8).toFixed(2);
+            result = `Overworld coordinates: X=${ox}, Z=${oz}`;
+        } else {
+            result = 'Please fill in either Overworld or Nether coordinates.';
+        }
+
+        // Display the result
+        document.getElementById('results-container').style.display = 'block';
+        document.getElementById('results').textContent = result;
+
+        // Clear the input fields
+        document.getElementById('overworld-x').value = '';
+        document.getElementById('overworld-z').value = '';
+        document.getElementById('nether-x').value = '';
+        document.getElementById('nether-z').value = '';
+    }
+</script>
+{% endblock %}

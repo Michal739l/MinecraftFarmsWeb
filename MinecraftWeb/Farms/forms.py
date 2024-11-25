@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Farm, ContactMessage
 
 class RegisterForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput(), label="Password", help_text="Enter a strong password.")
+    password = forms.CharField(widget=forms.PasswordInput(), label="Password", help_text="")
     confirm_password = forms.CharField(widget=forms.PasswordInput(), label="Confirm Password")
 
     class Meta:
@@ -15,7 +15,7 @@ class RegisterForm(forms.ModelForm):
             'email': 'Email Address',
         }
         help_texts = {
-            'username': 'Choose a unique username.',
+            'username': '',
             'email': '',
         }
 

@@ -11,4 +11,7 @@ urlpatterns = [
     path('farm/<int:pk>/', views.farm_detail, name='farm_detail'),
     path('contact/', views.contact_view, name='contact'),
     path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
+    path('remove-farm/', views.remove_farm, name='remove_farm'),
+    path('add_farm/', views.add_farm, name='add_farm'),
+    path('nether_calculator/', views.nether_calculator, name='nether_calculator'),
 ]
