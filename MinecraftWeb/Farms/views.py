@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import Farm
-from .forms import RegisterForm, ContactForm, FarmForm
+from .forms import RegisterForm, ContactForm, FarmForm, UserLoginForm
+
 
 def home(request):
     farms = Farm.objects.all()
@@ -76,6 +77,16 @@ def register(request):
         form = RegisterForm()
     return render(request, 'register.html', {'form': form})
 
+def login_view(request):
+    if request.method == 'POST':
+        form = UserLoginForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('home')  # Přesměrování na stránku po přihlášení (např. 'home')
+    else:
+        form = UserLoginForm()
+    return render(request, 'login.html', {'form': form})
 
 @login_required
 def logout_view(request):

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found - My Website{% endblock %}
+
+{% block content %}
+    <div class="custom-404-container">
+        <p class="custom-404-title">
+          404<br>
+          Oops! Page Not Found</p>
+        <p class="custom-404-message">
+            Sorry, the page you are looking for doesn't exist. You might have the wrong address, or the page may have moved.
+        </p>
+        <button onclick="window.location.href='/'" class="custom-404-button">Go Back Home</button>
+    </div>
+
+    <style>
+        .custom-404-container {
+            width: 60%;
+            margin: 100px auto;
+            padding: 40px;
+            background-color: #f9f9f9;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .custom-404-title {
+            font-size: 3em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .custom-404-message {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .custom-404-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .custom-404-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+{% endblock %}
